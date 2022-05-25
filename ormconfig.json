@@ -6,8 +6,8 @@
   "username": "postgres",
   "password": "postgres",
   "database": "almoxarifado",
-  "entities": ["dist/**/*.entity.js"],
-  "migrations": ["./src/database/migrations/*.ts"],
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "migrations": ["dist/database/migrations/*{.ts,.js}"],
   "cli": {
     "migrationsDir": "./src/database/migrations"
   }
