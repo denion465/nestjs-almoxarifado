@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn
 } from 'typeorm';
 
-import { Produto } from './produto.entity';
+import { Produto } from 'src/almoxarifado/produto/entity/produto.entity';
 
 @Entity()
 export class Estoque {

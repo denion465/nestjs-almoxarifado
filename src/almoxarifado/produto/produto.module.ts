@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Produto } from './entities/produto.entity';
-import { Entrada } from './entities/entrada.entity';
-import { EntradaProduto } from './entities/entrada.produto.entity';
-import { Estoque } from './entities/estoque.entity';
+import { Produto } from './entity/produto.entity';
+import { Entrada } from '../entrada/entity/entrada.entity';
+import { EntradaProduto } from '../entrada/entity/entrada.produto.entity';
+import { Estoque } from '../entrada/entity/estoque.entity';
 
-import { ProdutoController } from './controllers/produto.controller';
+import { ProdutoController } from './controller/produto.controller';
 import { ProdutoRepository } from './repository/produto.repository';
-import { ProdutoService } from './services/produto.service';
+import { ProdutoService } from './service/produto.service';
 
 @Module({
   imports: [

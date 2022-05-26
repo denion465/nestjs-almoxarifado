@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { plainToInstance } from 'class-transformer';
 
-import { Produto } from '../entities/produto.entity';
+import { Produto } from '../entity/produto.entity';
 import { IProdutoRepository } from './produto.repository.interface';
 import { CreateProdutoDto } from '../dto/create.produto.dto';
 import { ProdutoDto } from '../dto/produto.dto';
