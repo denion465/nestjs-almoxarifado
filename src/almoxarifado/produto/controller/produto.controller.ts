@@ -10,11 +10,11 @@ export class ProdutoController {
 
   @Get('/findAll')
   async findAll(): Promise<ProdutoDto[]> {
-    return await this.produtoService.findAll();
+    return this.produtoService.findAll();
   }
 
   @Post('/save')
   async save(@Body() produto: CreateProdutoDto): Promise<ProdutoDto> {
-    return await this.produtoService.create(produto);
+    return this.produtoService.create(produto);
   }
 }
