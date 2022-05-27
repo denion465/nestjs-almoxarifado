@@ -20,9 +20,9 @@ export class Produto {
   @Column()
   observacao: string;
 
-  @CreateDateColumn()
-  data_cadastro: Date;
+  @CreateDateColumn({ name: 'data_cadastro' })
+  dataCadastro: Date;
 
-  @UpdateDateColumn()
-  data_atualizacao: Date;
+  @UpdateDateColumn({ name: 'data_atualizacao' })
+  dataAtualizacao: Date;
 }

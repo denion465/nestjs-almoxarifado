@@ -11,10 +11,10 @@ export class Entrada {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ name: 'numero_entrada' })
   @Generated('increment')
-  numero_entrada: number;
+  numeroEntrada: number;
 
-  @CreateDateColumn()
-  data_cadastro: Date;
+  @CreateDateColumn({ name: 'data_entrada' })
+  dataEntrada: Date;
 }
