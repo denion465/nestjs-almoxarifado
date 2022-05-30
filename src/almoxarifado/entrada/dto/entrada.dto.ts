@@ -5,7 +5,8 @@ export class EntradaDto {
   @Expose()
   id: string;
 
+  @Expose()
   numeroEntrada: number;
 
-  dataCadastro: Date;
+  dataEntrada: Date;
 }
