@@ -1,18 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
 
 import { EntradaRepository } from '../repository/entrada.repository';
-import { EstoqueRepository } from '../../estoque/repository/estoque.repository';
 import { EntradaProdutosReqDto } from '../dto/entrada.produtos.req.dto';
-import { EntradaProdutoDto } from '../dto/entrada.produto.dto';
 import { IEntradaProdutosResDto } from '../dto/entrada.produtos.res.dto';
+import { EstoqueService } from 'src/almoxarifado/estoque/service/estoque.service';
 
 @Injectable()
 export class EntradaService {
   constructor(
     @Inject(EntradaRepository)
     private readonly entradaRepository: EntradaRepository,
-    @Inject(EstoqueRepository)
-    private readonly estoqueRepository: EstoqueRepository
+    @Inject(EstoqueService)
+    private readonly estoqueService: EstoqueService
   ) {}
 
   async createEntrada({
@@ -30,7 +29,7 @@ export class EntradaService {
 
       IdEntradaProduto = entradaProduto.id;
 
-      await this.generateEstoque(entradaProduto);
+      await this.estoqueService.updateEstoque(entradaProduto);
     }
 
     return {
@@ -38,15 +37,5 @@ export class EntradaService {
       numeroEntrada: entrada.numeroEntrada,
       produtos
     };
-  }
-
-  async generateEstoque({
-    produto,
-    quantidade
-  }: EntradaProdutoDto): Promise<void> {
-    await this.estoqueRepository.createEntradaEstoque({
-      produto,
-      quantidade
-    });
   }
 }

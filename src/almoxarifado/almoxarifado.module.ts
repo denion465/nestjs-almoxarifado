@@ -15,6 +15,7 @@ import { EntradaRepository } from './entrada/repository/entrada.repository';
 import { EntradaService } from './entrada/service/entrada.service';
 
 import { EstoqueRepository } from './estoque/repository/estoque.repository';
+import { EstoqueService } from './estoque/service/estoque.service';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { EstoqueRepository } from './estoque/repository/estoque.repository';
     ProdutoService,
     EntradaRepository,
     EntradaService,
-    EstoqueRepository
+    EstoqueRepository,
+    EstoqueService
   ]
 })
 export class AlmoxarifadoModule {}

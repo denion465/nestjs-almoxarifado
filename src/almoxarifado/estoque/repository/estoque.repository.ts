@@ -5,6 +5,9 @@ import { Repository } from 'typeorm';
 import { Estoque } from '../entity/estoque.entity';
 import { IEstoqueRepository } from './estoque.repository.interface';
 import { EstoqueProdutoDto } from '../dto/estoque.produto.dto';
+import { EstoqueDto } from '../dto/estoque.dto';
+import { plainToInstance } from 'class-transformer';
+import { ProdutoDto } from 'src/almoxarifado/produto/dto/produto.dto';
 
 @Injectable()
 export class EstoqueRepository implements IEstoqueRepository {
@@ -13,31 +16,21 @@ export class EstoqueRepository implements IEstoqueRepository {
     private readonly estoqueRepository: Repository<Estoque>
   ) {}
 
-  async createEntradaEstoque({
-    produto,
-    quantidade
-  }: EstoqueProdutoDto): Promise<void> {
-    const estoque = await this.estoqueRepository.findOne({
-      where: { produto }
+  async findEstoqueByProduto(produto: ProdutoDto): Promise<EstoqueDto> {
+    const estoque = this.estoqueRepository.findOne({
+      where: {
+        produto
+      }
     });
 
-    if (estoque) {
-      const quantidadeTotal = (estoque.quantidadeTotal += quantidade);
+    return plainToInstance(EstoqueDto, estoque);
+  }
 
-      const updatedEstoque = this.estoqueRepository.create({
-        ...estoque,
-        quantidadeTotal
-      });
-
-      await this.estoqueRepository.save(updatedEstoque);
-      return;
-    }
-
-    const newEstoque = this.estoqueRepository.create({
-      produto,
-      quantidadeTotal: quantidade
+  async updateEntradaEstoque(entradaEstoque: EstoqueProdutoDto): Promise<void> {
+    const newEntradaEstoque = this.estoqueRepository.create({
+      ...entradaEstoque
     });
 
-    await this.estoqueRepository.save(newEstoque);
+    await this.estoqueRepository.save(newEntradaEstoque);
   }
 }
