@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { EntradaRepository } from '../repository/entrada.repository';
 import { EntradaProdutosReqDto } from '../dto/entrada.produtos.req.dto';
 import { IEntradaProdutosResDto } from '../dto/entrada.produtos.res.dto';
-import { EstoqueService } from 'src/almoxarifado/estoque/service/estoque.service';
+import { EstoqueService } from '../../../almoxarifado/estoque/service/estoque.service';
 
 @Injectable()
 export class EntradaService {

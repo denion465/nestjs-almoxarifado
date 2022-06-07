@@ -1,7 +1,7 @@
 export class EstoqueDto {
   id: string;
 
-  produto_id: string;
+  produtoId: string;
 
   quantidadeTotal: number;
 }

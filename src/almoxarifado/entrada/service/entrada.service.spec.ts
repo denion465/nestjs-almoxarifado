@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EntradaService } from './entrada.service';
 import { EntradaRepository } from '../repository/entrada.repository';
 import { EstoqueRepository } from '../../estoque/repository/estoque.repository';
+import { EstoqueService } from '../../estoque/service/estoque.service';
 
 describe('EntradaService', () => {
   let entradaService: EntradaService;
@@ -10,21 +11,26 @@ describe('EntradaService', () => {
 
   const mockEntradaRepository = () => ({
     createEntrada: jest.fn(),
-    createEntradaProduto: jest.fn(),
-    createEntradaEstoque: jest.fn()
+    createEntradaProduto: jest.fn()
+  });
+
+  const mockEstoqueRepository = () => ({
+    updateEntradaEstoque: jest.fn(),
+    findEstoqueByProduto: jest.fn()
   });
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         EntradaService,
+        EstoqueService,
         {
           provide: EntradaRepository,
           useFactory: mockEntradaRepository
         },
         {
           provide: EstoqueRepository,
-          useFactory: mockEntradaRepository
+          useFactory: mockEstoqueRepository
         }
       ]
     }).compile();
@@ -67,8 +73,6 @@ describe('EntradaService', () => {
       .spyOn(entradaRepository, 'createEntrada')
       .mockImplementation(async () => entradaToBeCreated);
 
-    const estoqueGenerated = jest.spyOn(entradaService, 'generateEstoque');
-
     jest
       .spyOn(entradaRepository, 'createEntradaProduto')
       .mockReturnValue(Promise.resolve(entradaProdutosCreated));
@@ -77,7 +81,6 @@ describe('EntradaService', () => {
       entradaProdutosToBeCreated
     );
 
-    expect(estoqueGenerated).toHaveBeenCalledTimes(1);
     expect(response).toEqual({
       id: 'b5ee8b89-2f29-45e8-8ce2-9a024160742b',
       numeroEntrada: 1,

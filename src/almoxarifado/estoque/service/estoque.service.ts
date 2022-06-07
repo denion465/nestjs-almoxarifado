@@ -25,7 +25,7 @@ export class EstoqueService {
       return this.estoqueRepository.updateEntradaEstoque({
         id: estoque.id,
         produto: {
-          id: estoque.produto_id
+          id: estoque.produtoId
         },
         quantidadeTotal
       });
