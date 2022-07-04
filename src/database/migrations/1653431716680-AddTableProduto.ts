@@ -8,8 +8,8 @@ export class AddTableProduto1653431716680 implements MigrationInterface {
           id uuid not null default uuid_generate_v4(),
           descricao character varying(100) not null,
           observacao character varying(100),
-          data_cadastro timestamp without time zone not null default now(),
-          data_atualizacao timestamp without time zone not null default now(),
+          data_cadastro timestamp with time zone not null default now(),
+          data_atualizacao timestamp with time zone not null default now(),
           constraint pk_produto PRIMARY KEY (id)
         );
       `
